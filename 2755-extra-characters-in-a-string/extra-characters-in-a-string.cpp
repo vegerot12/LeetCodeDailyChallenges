@@ -1,4 +1,5 @@
 class TrieNode {
+    // O(N*N) = n char of string s we run the dfs * for  each char start , we run a loop from that index till end of str so again n. 
 public:
     unordered_map<char, TrieNode*> children;
     bool is_word;

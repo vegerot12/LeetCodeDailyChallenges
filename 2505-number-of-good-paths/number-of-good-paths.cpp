@@ -1,3 +1,7 @@
+// TC: O(n logn) SC:O(n)
+
+// VERY DIFFICULT 
+
 class Solution {
     // unionParent 
     int ds_find(int i, vector<int>& parent) {

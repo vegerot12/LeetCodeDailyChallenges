@@ -18,7 +18,7 @@ public:
             m[s[i]] = i;
 
         }
-        cout<< max(len, i-start);
-        return m.size() == s.size() ? max(len, i-start): max(len, i-start);
+       
+        return  max(len, i-start);
     }
 };

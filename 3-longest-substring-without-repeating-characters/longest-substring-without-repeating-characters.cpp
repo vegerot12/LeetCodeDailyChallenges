@@ -2,7 +2,7 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         if(s.size() <=1) return s.size()  ;
-        int start=0; // if we keep start as 1 it will interfere with map 0
+        int start=0; // if we keep start as 0 it will interfere with map 0
         unordered_map<int,int> m;
         int len = 1,i=0;
 

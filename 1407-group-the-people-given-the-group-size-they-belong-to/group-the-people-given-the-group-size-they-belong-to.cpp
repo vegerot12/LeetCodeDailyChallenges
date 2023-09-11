@@ -1,7 +1,7 @@
 /*
 
 Put the person i in the group of size groupSize[i] 
-TC : O(n) and SC = 2*O(n) - map and vector res ;
+TC : O(n) and SC = O(n) - map and vector res ;
 */
 
 class Solution {

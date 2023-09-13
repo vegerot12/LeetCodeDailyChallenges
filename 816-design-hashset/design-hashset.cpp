@@ -20,41 +20,36 @@ void remove(int x){
 
 };
 
-class MyHashSet{
-private:
-vector<Bucket> buckets;
-int hashSize;
 
-int hash(int key){
-return key%hashSize;
-}
-
+class MyHashSet {
+    private: 
+    int hash;
+    vector<Bucket> buckets; // each bucket will have a list 
 public:
-// constructor  - accordinf to size the time taken varies due to the colission and individual read 
-MyHashSet(int size=137){
-hashSize=size;
-buckets.resize(size);
-}
-// insert a  key
-void add(int key){
-int h = hash(key);
-buckets[h].add(key);
-}
+    MyHashSet(int size=137) {
+        hash = size;
+        buckets.resize(size);
+    }
+    
+    void add(int key) {
+        int x = key%hash; // we hash it
+        buckets[x].add(key); // put it in hashed list 
+    }
+    
+    void remove(int key) {
+         int x = key%hash;
+       
+         buckets[x].remove(key);
 
-// remove a key
-void remove(int key){
-int h = hash(key);
-
-buckets[h].remove(key);
-}
-
-// to check contains
-bool contains(int key){
-int h = hash(key);
-return buckets[h].contains(key);
-
-}
+        
+    }
+    
+    bool contains(int key) {
+         int x = key%hash;
+         return buckets[x].contains(key);
+    }
 };
+
 // /**
 //  * Your MyHashSet object will be instantiated and called as such:
 //  * MyHashSet* obj = new MyHashSet();
@@ -91,7 +86,40 @@ SC : O(n)
 
 // };
 
+// class MyHashSet{
+// private:
+// vector<Bucket> buckets;
+// int hashSize;
 
+// int hash(int key){
+// return key%hashSize;
+// }
+
+// public:
+// // constructor  - accordinf to size the time taken varies due to the colission and individual read 
+// MyHashSet(int size=137){
+// hashSize=size;
+// buckets.resize(size);
+// }
+// // insert a  key
+// void add(int key){
+// int h = hash(key);
+// buckets[h].add(key);
+// }
+
+// // remove a key
+// void remove(int key){
+// int h = hash(key);
+
+// buckets[h].remove(key);
+// }
+
+// // to check contains
+// bool contains(int key){
+// int h = hash(key);
+// return buckets[h].contains(key);
+
+// }
 
 // };
 

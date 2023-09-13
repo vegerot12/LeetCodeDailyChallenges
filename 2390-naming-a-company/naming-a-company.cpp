@@ -10,23 +10,37 @@ public:
          }
 
 
-        for(int i=0;i<26;i++){
+        for(int i=0;i<25;i++){
             // fpr each in set i with each in other 25 sets 
             for(int j=i+1;j<26;j++){
-                long long c1 =0, c2=0;
-                for(auto& p:s[i]){
-                    if(s[j].find(p) == s[j].end())
-                    c1++;
-                }
+                long long mutual=0;
                 for(auto& p:s[j]){
-                    if(s[i].find(p) == s[i].end())
-                    c2++;
+                    if(s[i].find(p) != s[i].end())
+                    mutual++;
                 }
-                cnt+= c1*c2;
+            //     
+               
+                cnt+= ((s[i].size()-mutual )*( s[j].size() - mutual ));
+                // cnt +=  ((s[i].size() -mutual) * (s[j].size()-mutual));
 
 
             }
         }
-        return cnt*2;
+        
+    // for(int i=0;i<25;i++){
+    //         for(int j=i+1;j<26;j++){
+    //            // find mutual
+    //            int mutual =0;
+    //            for(auto& p: s[j]){
+    //                 if(s[i].find(p) != s[i].end())
+    //                 mutual++;
+    //            }
+    //             // find valid names
+    //             // each pair of valid suffix will lead to two names- ab and ba  so 2* cnt
+    //             cnt += 2* ((s[i].size() -mutual) * (s[j].size()-mutual));
+
+    //         }
+    //     }
+return cnt*2;
     }
 };

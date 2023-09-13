@@ -1,4 +1,5 @@
 class Solution {
+    // )(n)and O(n)
    private:
    string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 

@@ -1,5 +1,6 @@
 class Solution {
 public:
+// O(n) and O(n);
  
     vector<string> fullJustify(vector<string>& words, int maxWidth) {
         int curCnt = 0, curSize = 0,start; // cnt of words in cur line, words appended in cur line with w/o space 
@@ -10,6 +11,7 @@ vector<string> res;
 
         while(i<n){
             curCnt = 0, curSize = 0, cur ="", start = i;
+            // as long as it fits in cur line 
             while(i<n and  curSize + curCnt + words[i].size()<= maxWidth ){
                 curCnt++;
                 curSize += words[i].size();
@@ -17,7 +19,7 @@ vector<string> res;
                 i++;
             }
 
-              // if fits correctly just push in res
+             // if fits correctly just push in res
             if(curSize + curCnt-1 == maxWidth ){
             res.push_back(cur);
             continue;

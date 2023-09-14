@@ -1,5 +1,6 @@
 class Solution {
 public:
+// O(n) and O(1)
     int partitionString(string s) {
         vector<int> m(26,0);
         int start =0, res =1; // initially 1 string so res starts at 1

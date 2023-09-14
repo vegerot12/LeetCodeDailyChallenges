@@ -1,6 +1,7 @@
+// O(1)and O(1)
 class ParkingSystem {
     private:
-    vector<int> slots = {0,0,0};
+    int slots[3];
 public:
     ParkingSystem(int big, int medium, int small) {
         slots[0] = big;
@@ -11,8 +12,7 @@ public:
     }
     
     bool addCar(int carType) {
-        slots[carType-1]--;
-        return slots[carType-1] >=0;
+        return --slots[carType-1] >=0;
         
     }
 };

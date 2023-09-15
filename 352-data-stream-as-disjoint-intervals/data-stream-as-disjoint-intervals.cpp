@@ -1,35 +1,28 @@
 class SummaryRanges {
     private:
-    set<int> values;
+    map<int,bool> intr ; // tree Map
 public:
     SummaryRanges() {
         
     }
     
     void addNum(int value) {
-        values.insert(value);
+        intr[value] = true;
     }
     
     vector<vector<int>> getIntervals() {
-        if(values.empty()) return {};
         vector<vector<int>> res;
+        for(auto itr: intr){
+          
 
-        int left =-1, right=-1;
-        for(auto& value:values){
-            if(left == -1 ){
-                left = right = value;
-            }
-            else if(right+1 == value){
-                right = value;
+           if( !res.empty() && res.back()[1] + 1 == itr.first){
+                res.back()[1] = itr.first;
             }
             else{
-                res.push_back({ left, right});
-             left = right = value;  // because cur value did not fit in the cur interval so we closed it and put in res we need to begin a new interval from cur value so assign both left and right with valye 
+            res.push_back({itr.first, itr.first});
 
             }
-            
         }
-        res.push_back({ left, right});
         return res;
     }
 };

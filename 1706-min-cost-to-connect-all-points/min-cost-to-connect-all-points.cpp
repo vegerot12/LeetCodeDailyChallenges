@@ -1,32 +1,31 @@
+
 class Solution {
-public:
-    int minCostConnectPoints(vector<vector<int>>& points) {
-        
-            // priority_queue<pair<int,int>> pq; // dis, node
-
-        int n = points.size(),i=0,res=0;
-        vector<bool> visited(n);
-        int connected =0;
-
-            priority_queue<pair<int,int>> pq; // dis, node
-        while(++connected < n){
-              
-            visited[i] = true;
-            for(int j=0;j<n;j++){
-                if(!visited[j]){
-                    pq.push({ -(abs(points[i][0] - points[j][0]) +abs(points[i][1] - points[j][1] )), j});
-                }
-            }
-while (visited[pq.top().second])
-            pq.pop();
-
-            res+= -pq.top().first;
-            i = pq.top().second;
-            pq.pop();
-            
+    public:
+int find(vector<int> &ds, int i) {
+    return ds[i] < 0 ? i : ds[i] = find(ds, ds[i]);
+}
+int minCostConnectPoints(vector<vector<int>>& ps) {
+    int n = ps.size(), res = 0;
+    vector<int> ds(n, -1);
+    vector<array<int, 3>> arr;
+    for (auto i = 0; i < n; ++i)
+        for (auto j = i + 1; j < n; ++j) {
+            arr.push_back({abs(ps[i][0] - ps[j][0]) + abs(ps[i][1] - ps[j][1]), i, j});
         }
-        return res;
-
-
+    make_heap(begin(arr), end(arr), greater<array<int, 3>>());
+    while (!arr.empty()) {
+        pop_heap(begin(arr), end(arr), greater<array<int, 3>>());
+        auto [dist, i, j] = arr.back();
+        arr.pop_back();
+        i = find(ds, i), j = find(ds, j);
+        if (i != j) {
+            res += dist;
+            ds[i] += ds[j];
+            ds[j] = i;
+            if (ds[i] == -n)
+                break;
+        }
     }
+    return res;
+}
 };

@@ -41,12 +41,12 @@ public:
                 int y = p[2] + offsets[k+1];
                 if(x<n && x>=0 && y<m && y>=0 && !vis[x][y]){
 
-                    // 5 
+                    // 5  if neighbor height is smaller thna minBoundary then this cell acts as storage so cal res -- eater stored is minbd - neighbor height
                     if( minBd > height[x][y]){
                         res+= (minBd - height[x][y]);
 
                     }
-                    // 6
+                    // 6 push neighbor in pq if neighbor is less or more than the minbd in both case 
                     pq.push({height[x][y], x, y });
                     vis[x][y] = true;
                 }

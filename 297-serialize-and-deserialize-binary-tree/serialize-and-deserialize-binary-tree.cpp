@@ -33,7 +33,6 @@ public:
             auto p= q.front();
             q.pop();
 
-
             if(p){
                 res+=to_string(p->val)+",";
                 q.push(p->left);
@@ -47,7 +46,7 @@ public:
     }
 
     // Decodes your encoded data to tree.
-    TreeNode* deserialize(string data) {
+    TreeNode* deserialize(string data){
         if(data.size()==0 || data=="NULL") return NULL;
         queue<string> d = tokenise(data); 
         int x = stoi(d.front());
@@ -64,7 +63,7 @@ public:
             string s = d.front();
             d.pop();
             if(s!="NULL"){
-                 int val= stoi(s);              
+                int val = stoi(s);              
                 p->left = new TreeNode(val);
             }
             else p->left = NULL;

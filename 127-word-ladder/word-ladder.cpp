@@ -27,9 +27,7 @@ steps++;
                     string tmp = p;
                     for(char c = 'a';c<='z';c++){
                         tmp[i] = c;
-                            cout<<tmp<<endl;
                         if(dict.find(tmp) != dict.end()){
-                            cout<<"found"<<tmp<<endl;
                             q.push(tmp);
                             dict.erase(tmp);
                         }

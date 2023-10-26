@@ -9,9 +9,6 @@ public:
             int ch = min(h[l], h[r]);
             while(l<r && ch == h[l]) l++;
             while(l<r && ch == h[r]) r--;
-
-            // if(h[l] < h[r]) l++;
-            // else r--;
         }
         return res;
     }

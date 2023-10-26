@@ -18,22 +18,24 @@ public:
         int n = nums.size();
         
         vector<int> prod(n);
+
+        prod[0] = 1;
       
-        prod[0] =1;
+      // LTR
+      for(int i =1;i<n;i++){
+          prod[i] = prod[i-1]* nums[i-1];
+
+      }
+// RTL
+      int right=1;
+       for(int i=n-2;i>=0;i--){
+          right = nums[i+1]* right;
+          prod[i] = prod[i]*right;
+
+      }
         
-        // 1. runninf prdduct  of i contains  prod from 0 to i-1
-       for(int i =1;i<n;i++)
-           prod[i] = prod[i-1] * nums[i-1]; 
-        
-        int prodRight =1; // prodRight always contains prod form right end to i+1 in reverse order 
-       // 2. right to left
-       for(int i=n-2;i>=0;i--)
-       {
-           prodRight *= nums[i+1]; 
-           prod[i] *=  prodRight ; // prod[i] contains prod from 0 to i-1 and prodRight contains form i+1 to n so except i all 
-     
            
-       }
+       
         return prod;
     }
      

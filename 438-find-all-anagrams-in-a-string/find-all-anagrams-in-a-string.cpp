@@ -46,44 +46,45 @@ public:
 //         return res;
    
 
-        vector<int> anagrams;
-        int windowStart = 0;
+        vector<int> res;
+        int st = 0;
         int matched = 0;
-        unordered_map<char, int> charFrequencyMap;
+        unordered_map<char, int> m;
 
-        for (int i = 0; i < p.length(); i++) {
-            charFrequencyMap[p[i]]++;
+        for (int i = 0; i < p.size(); i++) {
+            m[p[i]]++;
         }
 
-        for (int windowEnd = 0; windowEnd < s.length(); windowEnd++) {
-            char right = s[windowEnd];
+        for (int e = 0; e < s.size(); e++) {
+           
 
-            if (charFrequencyMap.find(right) != charFrequencyMap.end()) {
-                charFrequencyMap[right]--;
+            if (m.find(s[e]) != m.end()) {
+                m[s[e]]--;
 
-                if (charFrequencyMap[right] == 0) {
+                if (m[s[e]] == 0) {
                     matched++;
                 }
             }
 
-            if (matched == (int)charFrequencyMap.size()) {
-                anagrams.push_back(windowStart);
+            if (matched == (int)m.size()) {
+                res.push_back(st);
             }
 
-            if (windowEnd >= p.length() - 1) {
-                char left = s[windowStart++];
+            if (e >= p.length() - 1) {
+               
 
-                if (charFrequencyMap.find(left) != charFrequencyMap.end()) {
-                    if (charFrequencyMap[left] == 0) {
+                if (m.find(s[st]) != m.end()) {
+                    if (m[s[st]] == 0) {
                         matched--;
                     }
 
-                    charFrequencyMap[left]++;
+                    m[s[st]]++;
                 }
+                st++;
             }
         }
 
-        return anagrams;
+        return res;
     }
 };
       

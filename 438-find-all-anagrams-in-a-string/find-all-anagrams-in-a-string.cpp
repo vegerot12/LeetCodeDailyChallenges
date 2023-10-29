@@ -1,36 +1,90 @@
 class Solution {
 public:
-    bool isSame(int  m[26],int sm[26]){
-        for(int i =0;i<26;i++){
-            cout<<m[i]<<sm[i]<<endl;
-            if(m[i] != sm[i]) return false;
-        }
-        return true;
-    }
+   
     vector<int> findAnagrams(string s, string p) {
 
-        if(s.size() < p.size()) return {};
-        int  m[26]={0}, sm[26]={0};
-        vector<int> res;
+//         if(s.size() < p.size()) return {};
+//         unordered_map<int,int> m;
+//         vector<int> res;
 
-        for(int i =0;i<p.size() ;i++){
-            m[p[i]-'a']++;
-            sm[s[i]-'a']++;
-        }
+//         for(int i =0;i<p.size() ;i++){
+//             m[p[i]-'a']++;
+            
+//         }
                 
 
-int i = 0;
-        for( i =0;i<s.size()- p.size();i++){
-            int r = i+p.size();
+// int i = 0, match =0;
+// int r = 0;
 
-            if(isSame(sm,m)) res.push_back(i);
+//         while( r<s.size()){
+            
+//             if(m.find(s[r]-'a') != m.end()){
+//               m[s[r] - 'a']--;
+//               cout<<s[r]<<m[s[r]-'a']<<endl;
+//               if(m[s[r]-'a'] == 0) match++;
+              
+//             }
+//             // cout<<match<<endl;
+//                 r++;
+//             if(match == m.size()) res.push_back(i);
+//             if(r >= p.size()-1 ){
+//               if(m.find(s[i]-'a') != m.end()){
+//               if(m[s[i]-'a'] == 0) match--;
+//               m[s[i] - 'a']++;
 
-            sm[s[i] - 'a']--;
-            sm[s[r] - 'a']++;
+//             }
+//             i++;
+//             }
+
+             
+         
+           
+
+            
+            
+//         }
+//         return res;
+   
+
+        vector<int> anagrams;
+        int windowStart = 0;
+        int matched = 0;
+        unordered_map<char, int> charFrequencyMap;
+
+        for (int i = 0; i < p.length(); i++) {
+            charFrequencyMap[p[i]]++;
         }
-        if(isSame(sm,m)) res.push_back(i);
-        return res;
 
-      
+        for (int windowEnd = 0; windowEnd < s.length(); windowEnd++) {
+            char right = s[windowEnd];
+
+            if (charFrequencyMap.find(right) != charFrequencyMap.end()) {
+                charFrequencyMap[right]--;
+
+                if (charFrequencyMap[right] == 0) {
+                    matched++;
+                }
+            }
+
+            if (matched == (int)charFrequencyMap.size()) {
+                anagrams.push_back(windowStart);
+            }
+
+            if (windowEnd >= p.length() - 1) {
+                char left = s[windowStart++];
+
+                if (charFrequencyMap.find(left) != charFrequencyMap.end()) {
+                    if (charFrequencyMap[left] == 0) {
+                        matched--;
+                    }
+
+                    charFrequencyMap[left]++;
+                }
+            }
+        }
+
+        return anagrams;
     }
 };
+      
+  

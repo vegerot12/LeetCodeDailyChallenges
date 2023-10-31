@@ -11,10 +11,11 @@ public:
             for(int j =0;j<m;j++){
                 if(matrix[i][j] == 0)
                 q.push({i,j});
+                else 
+                matrix[i][j] = -1;
             }
         }
 int dis = 0;
-vector<vector<int>> res = matrix;
 
         while(!q.empty()){
            int s = q.size();
@@ -25,9 +26,9 @@ vector<vector<int>> res = matrix;
             for(int k = 0 ; k< 4;k++){
                 int x = offset[k] + p.first;
                 int y = offset[k+1] + p.second;
-                if(x>=0 and x<n and y>=0 and y<m and matrix[x][y] == 1){
-                    res[x][y] = dis+1;
-                    matrix[x][y] = 0;
+                if(x>=0 and x<n and y>=0 and y<m and matrix[x][y] == -1){
+                   
+                    matrix[x][y] = dis+1;
 
                     q.push({x,y});
 
@@ -39,6 +40,6 @@ vector<vector<int>> res = matrix;
 
 
         }
-        return res;
+        return matrix;
     }
 };

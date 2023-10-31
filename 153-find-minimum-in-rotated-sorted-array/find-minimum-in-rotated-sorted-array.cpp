@@ -3,7 +3,7 @@ public:
     int findMin(vector<int>& nums) {
          int l = 0, r = nums.size()-1;
 if(nums.size()==1) return nums[0];
-        while(l<r){
+        while(l<=r){
 
             int m = (r-l)/2 + l;
                

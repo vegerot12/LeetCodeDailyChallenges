@@ -1,13 +1,13 @@
 class Solution {
     int offset[5] = {0,1,0,-1,0};
-    void dfs(int i,int j,vector<vector<bool>>& curVis,vector<vector<bool>>& otherVis,vector<vector<int>>& heights,vector<vector<int>>& res){
-        // if(i<0 or j<0 or i>= heights.size() or j>= heights[0].size()) return ;
+    void dfs(int i,int j,vector<vector<int>>& vis,vector<vector<int>>& heights,vector<vector<int>>& res, int val){
+       
+       
+        if(vis[i][j]==val || vis[i][j]==3) return;
 
-        if(curVis[i][j]) return;
+        vis[i][j] += val;
 
-        curVis[i][j] = true;
-
-        if(otherVis[i][j]) {
+        if(vis[i][j]==3) {
             res.push_back({i,j});
 
         }
@@ -18,7 +18,7 @@ class Solution {
 
             if(x<0 or y<0 or x>= heights.size() or y>= heights[0].size() or heights[i][j] > heights[x][y]) continue;
             
-            dfs(x,y,curVis,otherVis,heights,res); 
+            dfs(x,y,vis,heights,res,val); 
 
             
 
@@ -32,18 +32,18 @@ public:
 
         int n = heights.size(), m = heights[0].size();
 
-        vector<vector<bool>> atl(n, vector<bool>(m, false)), pac(n, vector<bool>(m, false));
+        vector<vector<int>> vis(n, vector<int>(m, 0));
 
         for(int i =0;i<m;i++)  // col changes
         {
-            dfs(0,i, pac,atl, heights, res); // top and left pac
-            dfs(n-1,i, atl,pac, heights, res); // bottom and right atl
+            dfs(0,i, vis, heights, res, 1); // top and left pac
+            dfs(n-1,i,vis, heights, res, 2); // bottom and right atl
         }
 
          for(int i =0;i<n;i++) // row changes 
         {
-            dfs(i,0, pac,atl, heights, res); // top and left pac
-            dfs(i,m-1,  atl,pac, heights, res); // bottom and right atl
+            dfs(i,0,vis, heights, res, 1); // top and left pac
+            dfs(i,m-1,vis, heights, res, 2); // bottom and right atl
         }
 
         return res;

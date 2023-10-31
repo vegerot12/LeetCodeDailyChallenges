@@ -3,7 +3,7 @@ public:
     int numIslands(vector<vector<char>>& grid) {
       int count =0;
         int n = grid.size(), m = grid[0].size();
-        queue<array<int,3>> q;
+        queue<array<int,2>> q;
         int offsets[5] = {0,1,0,-1,0}; // neightbour index
         
         for(int i=0;i<n;i++){

@@ -1,7 +1,7 @@
 class Solution {
     int offset[5] = {0,1,0,-1,0};
     void dfs(int i,int j,vector<vector<bool>>& curVis,vector<vector<bool>>& otherVis,vector<vector<int>>& heights,vector<vector<int>>& res){
-        if(i<0 or j<0 or i>= heights.size() or j>= heights[0].size()) return ;
+        // if(i<0 or j<0 or i>= heights.size() or j>= heights[0].size()) return ;
 
         if(curVis[i][j]) return;
 

@@ -4,7 +4,6 @@ public:
     int offset[5] = { 0,1,0,-1,0};
 
     bool dfs(vector<vector<char>>& board,int i, int j, string word, int ind){
-        
         if(ind == word.size()) return true;
         if( i<0 || i>=board.size() || j<0 || j>= board[0].size()) return false;
 

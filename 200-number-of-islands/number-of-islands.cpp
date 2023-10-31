@@ -1,44 +1,9 @@
-// DFS
-// class Solution {
-    
-//     private:
-//     void dfs(vector<vector<char>>& grid, int i, int j){
-//         if( min(i,j) < 0 || i>=grid.size() || j>=grid[0].size() || grid[i][j]=='0') return ;
-//         grid[i][j] = '0';
-//         dfs(grid, i+1,j); 
-//         dfs(grid, i-1,j); 
-//         dfs(grid, i,j+1); 
-//         dfs(grid, i,j-1); 
-
-//     }
-// public:
-//     int numIslands(vector<vector<char>>& grid) {
-//         int r = grid.size(),c= grid[0].size();
-//         int cnt =0;
-//         for(int i=0;i<r;i++){
-//             for(int j=0;j<c;j++){
-//                 if(grid[i][j] == '1'){
-//                     cnt++;
-//                     dfs(grid,i,j);
-//                 }
-//             }
-//         }
-//         return cnt;
-//     }
-// };
-
-// BFS
 class Solution {
-public: // BFS , TC O(N*M) and SC = O(MN) 
-    // if we dont change visited then O(n2 * m2) 
-    // iterate through amtric and keep pushing 1s into bfs queue after marking them as 0(visitied)
-    // and keep popping from queue to do bfs 
-
-    // so for every node on finding a 1 we first traverse all its neighborus using bfs queue and comes back to the for loop again 
+public:
     int numIslands(vector<vector<char>>& grid) {
-    int count =0;
+      int count =0;
         int n = grid.size(), m = grid[0].size();
-        queue<vector<int>> q;
+        queue<array<int,3>> q;
         int offsets[5] = {0,1,0,-1,0}; // neightbour index
         
         for(int i=0;i<n;i++){
@@ -72,8 +37,6 @@ public: // BFS , TC O(N*M) and SC = O(MN)
         }
        return count;
         
+  
     }
 };
-
-
-

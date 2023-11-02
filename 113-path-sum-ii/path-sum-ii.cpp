@@ -11,21 +11,23 @@
  */
 class Solution {
 public:
-    void findSum(TreeNode* root, vector<int>& cur, vector<vector<int>>& res,int& targetSum , int curSum){
+    void findSum(TreeNode* root, vector<int>& cur, vector<vector<int>>& res,int targetSum ){
 
         if(!root) return ;
             
-            curSum += root->val;
+            
             cur.push_back(root->val);
             
-        if(!root->left and !root->right and targetSum==curSum ) {
+        if(!root->left and !root->right and targetSum==root->val ) {
             res.push_back(cur);
             
         }
-        findSum(root->left, cur,res,targetSum,curSum);
-        findSum(root->right, cur,res,targetSum,curSum);
+        else{
+
+        findSum(root->left, cur,res,targetSum - root->val);
+        findSum(root->right, cur,res,targetSum -root->val);
+        }
        
-        curSum -= root->val;
         cur.pop_back();
 
 
@@ -35,8 +37,8 @@ public:
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
         vector<vector<int>> res;
         vector<int> cur;
-        int curSum = 0;
-        findSum(root, cur,res, targetSum,curSum);
+       
+        findSum(root, cur,res, targetSum);
         return res;
     }
 };

@@ -29,9 +29,22 @@ public:
         vector<string> res;
         if(digits.size() == 0) return res;
         string cur;
-        int ind  =0;
+        // int ind  =0;
 
-        dfs(digits, m, res,cur,ind);
+        // dfs(digits, m, res,cur,ind);
+
+    res.push_back("");
+
+        for(int i=0;i<digits.size();i++){
+            vector<string> cur;
+                 for( auto c: m[digits[i]] ){
+            for(string s:res){
+                cur.push_back(s+c);
+            }
+            }
+            res=cur;
+           
+        }
         return res;
         
     }

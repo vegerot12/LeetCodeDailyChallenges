@@ -1,33 +1,31 @@
 class SummaryRanges {
-    vector<vector<int>> res;
 public:
+    vector<vector<int>> res;
     SummaryRanges() {
         
     }
     
     void addNum(int value) {
-        vector<int> newInterval = {value, value};
-        int i =0,overlap=0;
-        int n = res.size();
-        // for lopp exit will be when we crossed overlapping section 
-        for(i=0;i<n;i++){
-            // new interval ending is smaller than cur interval starting , we passed overlapping or consective  section
-            if(newInterval[1] +1< res[i][0]) break;
-            // if new interval started before cur interval ending 
-            if( newInterval[0]-1 <= res[i][1]){
+        vector<int> newInt = {value, value};
+        int overlap = 0,i=0;
+
+        for(i = 0;i< res.size();i++){
+
+            if(newInt[1]+1 < res[i][0]) break; 
+
+            if(newInt[0]-1 <= res[i][1]){
                 overlap++;
-                newInterval[0] = min(newInterval[0] , res[i][0]);
-                newInterval[1] = max(newInterval[1] , res[i][1]);
-
-
+                newInt[0] = min(newInt[0], res[i][0]);
+                newInt[1] = max(newInt[1], res[i][1]);
             }
+        }
+
+        if(overlap){
+            res.erase(res.begin()+(i-overlap) , res.begin()+i);
 
         }
-        if(overlap>0){
-            res.erase(res.begin()+(i-overlap) , res.begin()+i );
+        res.insert(res.begin()+(i-overlap), newInt);
 
-        }
-        res.insert(res.begin()+i-overlap , newInterval);
         
     }
     
@@ -42,4 +40,3 @@ public:
  * obj->addNum(value);
  * vector<vector<int>> param_2 = obj->getIntervals();
  */
- 

@@ -9,59 +9,72 @@
  * };
  */
 class Solution {
-    private: 
-    ListNode* getMid(ListNode* head){
-    if(!head  || !head->next) return head;
+public:
+    ListNode* getMid(ListNode* head) {
+ if(!head  || !head->next) return head;
+        ListNode* fast = head, *slow = head;
 
-       ListNode* slow=head, *fast=head; // to be tested 
-      // we check fast->next->next also because we need the node prev to mid so that node-> next is mid and we can also break link using node->next = null 
-       while(fast && fast->next && fast->next->next){
-           slow = slow->next;
-           fast = fast->next->next;
-           
-       }
-     
-       return slow;
+        while(fast and fast->next and fast->next->next){
+            fast = fast -> next -> next;
+            slow = slow -> next;
 
-    }
-
-    ListNode* merge(ListNode* first, ListNode* second){
-        ListNode* res = new ListNode(0);
-        ListNode* dummy = res; 
-        while(first && second){
-            if(first -> val < second -> val){
-                dummy->next = first ;
-                first = first->next;
-                
-            }
-            else{
-                dummy->next = second ;
-                second = second -> next;
-                
-            }
-            dummy = dummy -> next;
         }
 
-        if(first)
-        dummy -> next = first;
+        return slow ;
+    } 
 
-        if(second)
-        dummy -> next = second;
+    ListNode* merge(ListNode* l1, ListNode* l2){
+        ListNode* res, *dummy = new ListNode(0);
+        res = dummy;
 
-        return res-> next;
+        while(l1 && l2){
+            if(l1 -> val < l2-> val){
+                res-> next = l1;
+                l1  = l1-> next;
+            }
+            else {
+                res-> next = l2;
+                l2  = l2-> next;
+            }
+            res = res-> next;
+        }
 
+        if(l1) res -> next = l1;
+        if(l2) res -> next = l2;
+
+        return dummy -> next;
+        // ListNode* res = new ListNode(0);
+        // ListNode* dummy = res; 
+        // while(first && second){
+        //     if(first -> val < second -> val){
+        //         dummy->next = first ;
+        //         first = first->next;
+                
+        //     }
+        //     else{
+        //         dummy->next = second ;
+        //         second = second -> next;
+                
+        //     }
+        //     dummy = dummy -> next;
+        // }
+
+        // if(first)
+        // dummy -> next = first;
+
+        // if(second)
+        // dummy -> next = second;
+
+        // return res-> next;
     }
-public:
-    // Merge sort
-        // keep splitting the list to half recursively until single ele left 
-        // keep merging now recursively 
     ListNode* sortList(ListNode* head) {
-        if(!head  || !head->next) return head;
+                if(!head  || !head->next) return head;
 
-    ListNode* mid = getMid(head);
-    ListNode* secondList = mid->next;
-    mid->next = NULL;
-    return merge(sortList(head), sortList(secondList));
-   
+
+        ListNode* middle = getMid(head);
+        ListNode* sec = middle->next;
+        middle->next = NULL;
+
+        return merge(sortList(head), sortList(sec));
     }
 };

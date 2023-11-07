@@ -25,7 +25,7 @@ public:
         }
         return 0;
     }
-    int evalRPN(vector<string>& t) {
+    int evalRPNSTACK(vector<string>& t) {
         stack<long> s;
 
         int i =0, n = t.size();
@@ -48,5 +48,34 @@ public:
 
         }
         return s.top();
+    }
+    int evalRPN(vector<string>& t) {
+        
+
+        int i =0, n = t.size(), top =0;
+        long long res;
+        for(int i=0;i<n;i++){
+            if(isOp(t[i])){
+                  long long int b = stoll(t[--top]); // take last two as int
+                
+                long long int a = stoll(t[--top]);
+               
+            
+             
+               res = eval(a,b,t[i][0]);
+              cout<<res;
+              
+              t[top++] = to_string(res);
+           
+
+
+            }
+            else{
+                t[top++]= (t[i]);
+                
+            }
+
+        }
+        return stoi(t[0]);
     }
 };

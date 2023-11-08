@@ -17,17 +17,16 @@ public:
         }
         vector<string> res;
         int f = maxF;
-        while(true){
+        while(true and k>0){
             auto& cur = bucket[f--];
           
             sort(cur.begin(), cur.end());
 
             int i =0;
-            while(i<cur.size()){
+            while(i<cur.size() and k>0){
                
                 res.push_back(cur[i++]);
-                if(res.size()==k) return res;
-                
+               k--;
             }
         }
 

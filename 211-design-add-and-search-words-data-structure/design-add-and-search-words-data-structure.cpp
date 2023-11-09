@@ -1,62 +1,50 @@
-class TrieNode{
+class Trie{
     public:
-    bool isWord = false;
-    TrieNode* child[26];
+    Trie* child[26];
+    bool isEnd;
 };
 
+
+ 
+     
 class WordDictionary {
-    private:
-    
-    
-    bool searchWord(TrieNode* r, int index, string &word){
-        for(int ind = index;ind< word.size(); ind++){
-           char c = word[ind];
-           if(c!='.'){
-            if(!r->child[c-'a'])
-            return false;
-            r = r->child[c-'a'];
-          }
-          else{
-              for(int i=0;i<26;i++){
-                  /// . matches each non null child
-                  if(r->child[i]){
-                    //    r = r->child[i];
-                       if(searchWord(r->child[i], ind+1, word))
-                       return true;
-                  }
-                 
-              }
-              return false;
-          
-        }
-
-    }
-        return r->isWord;
-    }
 public:
-    TrieNode *root ;
-    WordDictionary() {
-        root = new TrieNode();
-    }
-    
-    void addWord(string word) {
-        TrieNode *r = root ;
-        for(auto &c:word){
-            if(!r->child[c-'a'])
-            r->child[c-'a'] = new TrieNode();
-            r = r->child[c-'a'];
 
+  Trie* root = new Trie();
+    bool search(Trie* root, int ind, string& w) {
+        for(int i = ind;i<w.size();i++){
+            if(w[i] != '.'){
+                if(!root->child[w[i]-'a']) return false;
+                root = root->child[w[i]-'a'];
+            }
+            else{
+                for(char c = 'a' ; c<='z';c++){
+                    if(root->child[c-'a']){
+                       if( search(root->child[c-'a'], i+1, w)) return true;
+                    }
+
+                }
+                // if not returned true at the end of all 26 chars at . tjen false
+                return false;
+            }
         }
-        r->isWord = true;
+        return root->isEnd;
+    }
+
+    
+    void addWord(string w) {
+         Trie* p = root;
+           for(auto& c: w){
+               if(!p->child[c-'a'])
+               p->child[c-'a'] = new Trie();
+               p=p->child[c-'a'];
+           }
+           p->isEnd = true;
     }
     
     bool search(string word) {
-         TrieNode *r = root ;
-         return searchWord(r,0,word);
-
-        }
-      
-    
+        return search(root,0, word);
+    }
 };
 
 /**

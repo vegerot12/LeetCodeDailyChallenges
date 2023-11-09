@@ -1,57 +1,47 @@
 class TrieNode{
     public:
-    bool isWord=false;
     TrieNode* child[26];
+    bool isEnd ;
+    
 };
-class Trie {
-    private:
-    TrieNode* root;
-public:
 
+class Trie {
+public:
+    TrieNode* root ;
     Trie() {
-      root = new TrieNode();
+        root = new TrieNode();
     }
     
     void insert(string word) {
-        
-       
-            TrieNode* curRoot = root;
-            for(auto &c:word){
-                if(!curRoot->child[c-'a']){
-                    curRoot->child[c-'a'] = new TrieNode();
-
-                }
-                curRoot = curRoot->child[c-'a'];
-            }
-            curRoot->isWord = true;
-        
+        TrieNode *p = root;
+        for(auto c:word){
+            if(!p->child[c-'a'] )
+            p->child[c-'a'] = new TrieNode();
+            p =  p->child[c-'a'] ;
+        }
+        p->isEnd = true;
     }
     
     bool search(string word) {
-       
-            TrieNode* curRoot = root;
-            for(auto &c:word){
-                if(curRoot->child[c-'a']==NULL){
-                    return false;
-
-                }
-                curRoot = curRoot->child[c-'a'];
-            }
-           return curRoot->isWord ;
-        
+        TrieNode *p = root;
+        for(auto c:word){
+            if(!p->child[c-'a'] )
+           return false;
+            p =  p->child[c-'a'] ;
+        }
+        return p->isEnd ;
+    
     }
     
     bool startsWith(string prefix) {
-         TrieNode* curRoot = root;
-            for(auto &c:prefix){
-                if(curRoot->child[c-'a']==NULL){
-                    return false;
+               TrieNode *p = root;
 
-                }
-                curRoot = curRoot->child[c-'a'];
-            }
-           return true ;
-        
+        for(auto c:prefix){
+            if(!p->child[c-'a'] )
+            return false;
+            p =  p->child[c-'a'] ;
+        }
+        return true ;
     }
 };
 

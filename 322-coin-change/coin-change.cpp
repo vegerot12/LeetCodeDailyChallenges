@@ -23,11 +23,40 @@ public:
         
         
     }
-    int coinChange(vector<int>& coins, int amount) {
+    int coinChangeMemoisation(vector<int>& coins, int amount) {
         
         vector<vector<int>> dp(coins.size(), vector<int> (amount+1, -1));
         
        int res = findCoin(coins,amount, 0,dp);
         return res == INT_MAX - 1 ? -1 : res;
     }
+
+    int coinChange(vector<int>& coins, int amount) {
+        
+        vector<int> dp( amount+1, amount+1);
+
+       
+        dp[0] = 0;
+        
+       for(int i = 1;i<=coins.size() ;i++){
+           for(int j =1;j<=amount;j++){
+               if(j >= coins[i-1])
+               dp[j]= min(1+dp[j-coins[i-1]] , dp[j]) ;
+           }
+       }
+       return dp[amount] > amount ? -1 : dp[amount];
+
+    //    vector<int> dp(amount+1, amount+1);
+    //     dp[0] =0;
+    //   for(int i=1;i<=coins.size();i++){
+    //       for(int j=1;j<=amount;j++){
+    //           if(j>=coins[i-1]){
+    //               dp[j] = min(dp[j], dp[j-coins[i-1]]+1);
+    //           }
+    //       }
+    //   }
+    //   return dp[amount] > amount ? -1 : dp[amount];
+    }
+
+    
 };

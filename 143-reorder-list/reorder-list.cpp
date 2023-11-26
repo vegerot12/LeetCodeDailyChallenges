@@ -46,21 +46,34 @@ public:
         ListNode* sec = reverse(mid);
         mid -> next = NULL;
 
-       ListNode* first = head, *fn, *sn;
+    //    ListNode* first = head, *fn, *sn;
 
-        while(first-> next and sec->next){
+    //     while(first-> next and sec->next){
 
-     fn=  first -> next;
-          first -> next = sec;
-          first = fn;
-          sn = sec->next;
-          sec -> next = fn;
+    //  fn=  first -> next;
+    //       first -> next = sec;
+    //       first = fn;
+    //       sn = sec->next;
+    //       sec -> next = fn;
           
-          sec = sn;
-        }
+    //       sec = sn;
+    //     }
+       ListNode* first = head, *res = new ListNode(),*dummy = res;
+
+    while(first and sec){
+        res -> next = first;
+        first = first->next;
+        res = res->next;
+        res -> next = sec;
+        sec = sec->next;
+        res = res->next;
+
+
+    }
+res->next = nullptr; // Set the next pointer of the last node to nullptr
 
         
-
+head = dummy->next;
 
     }
 };

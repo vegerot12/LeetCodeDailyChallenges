@@ -11,47 +11,38 @@
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-        ListNode* dummyHeader = new ListNode(-1);
-        dummyHeader -> next = head;
-
+        if(!head) return head;
         int tot = 0;
-        
-      
 
-        ListNode* preHead, *curHead;
-        preHead = dummyHeader, curHead = head;
+        ListNode* cur = head;
 
-        ListNode* cur = curHead;
-        ListNode* pre = preHead;
-
-
-        while(cur!=NULL){
-              tot++;
-              cur=cur->next;
+        while(cur){
+            cur = cur-> next;
+            tot++;
         }
 
+        ListNode* dummyH = new ListNode();
+        dummyH -> next = head;
+        ListNode *curH = head,*preH = dummyH, *pre,*next;
+        cur = head;
         while(tot>=k){
-        int cnt = 1;
-        cur = curHead;
-        pre = preHead;
-        ListNode* next;
-
-            while(cnt<=k && next!=NULL){
-                next = cur->next;
-                cur-> next = pre;
+            int cnt  =0;
+            cur = curH;
+            pre = preH;
+            while(cnt < k && next != NULL){
+             next = cur -> next;
+                cur -> next = pre;
                 pre = cur;
                 cur = next;
-                cnt++;
+                cnt ++ ;
             }
-
-            preHead -> next = pre; // to map the node before head to the cur reversed head of groip
-            curHead -> next = cur; // to map the cur last node of the group to the next node outside the grp
-
-            preHead = curHead;
-            curHead = cur; 
-            tot-= k;
+            preH -> next = pre;
+            curH -> next = cur;
+            preH = curH;
+            curH = cur;
+            tot -= k;
 
         }
-        return dummyHeader->next;
+        return dummyH -> next;
     }
 };

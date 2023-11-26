@@ -30,13 +30,7 @@ public:
         m[key] = nn;
     }
 
-    void removeFromLast(){
-        Node* tmp = tail -> prev;
-        tmp-> prev -> next = tail;
-        tail -> prev = tmp -> prev;
-        m.erase(tmp->key);
-        delete(tmp);
-    }
+    
 
     int remove(int key){
         Node *tmp = m[key];
@@ -58,7 +52,7 @@ public:
     void put(int key, int value) {
         if(m.find(key) == m.end()){
             if(m.size() == cap){
-                removeFromLast();
+                remove(tail->prev->key);
             }
         }else{
             remove(key);        

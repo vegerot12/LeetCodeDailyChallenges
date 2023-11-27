@@ -1,71 +1,39 @@
 class Solution {
 public:
+    vector<vector<int>> insert(vector<vector<int>>& it, vector<int>& nit) {
+        bool added = false;
+        int s=0,e=0, n = it.size();
 
-    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInt) {
-        // using new array
-/*
-         vector<vector<int>>  res;
-         int n = intervals.size();
-         
-         int i =0;
+        for(int i =0;i<n;i++){
+            if(nit[1]< it[i][0]){
+                it.insert(it.begin()+i, nit);
+                added = true;
+                break;
+            }
+            else{
+                if(max(it[i][0], nit[0]) <= min( it[i][1], nit[1])){
 
-      // before
-             while(i<n &&  intervals[i][1]  < newInterval[0]){
-                 res.push_back(intervals[i++]);
-             }
-      // during       
-             while(i<n && max(intervals[i][0], newInterval[0]) <= min(intervals[i][1], newInterval[1])) {
-                 newInterval[0] = min(intervals[i][0], newInterval[0]);
-                 newInterval[1] = max(intervals[i][1], newInterval[1]);
-                 i++;
-             }
-             res.push_back(newInterval);
-// after
-             while(i<n)res.push_back(intervals[i++]);
-       
-         return res;
-         */
+                    s=i,e=i;
+                while(i<n && max(it[i][0], nit[0]) <= min( it[i][1], nit[1])){
+                   nit[0] = min(nit[0], it[i][0]);
+                   nit[1] = max(nit[1], it[i][1]);
+                   e=i;
+                   i++;
 
-// WITHOUT NEW ARR
-  int n = intervals.size();
-         
-         
-         bool added = false;
-
-         for(int i =0;i<n;i++){
-             // new interval ends before this starts
-             if(newInt[1]<intervals[i][0]){
-                 intervals.insert(intervals.begin() + i, newInt);
-                 added = true;
-                 break;
-             }
-                // overlap
-             else {
-                if(max(intervals[i][0], newInt[0]) <= min(intervals[i][1],newInt[1] )){
-                    int s = i, e=i;
-                    while(i<n && intervals[i][0] <= newInt[1] ){
-                        e = i;
-                        
-                        newInt[0] = min(intervals[i][0], newInt[0]);
-                        newInt[1] = max(intervals[i][1], newInt[1]);
-                        i++;
-
-
-                    }
-                   intervals.erase(intervals.begin() + s, intervals.begin() + e+1); // excliding end will be erased so +1 
-                   intervals.insert(intervals.begin() + s, newInt);
-                    added = true;
-                    break;
                 }
-             }
-         }
+                cout<<s<<e;
+ it.erase(it.begin()+s, it.begin()+e+1  );
+                it.insert(it.begin()+s, nit );
+                added = true;
+                break;
 
-         if(!added)
-         intervals.push_back(newInt);
+                }
 
+            }
+        }
 
-          
-return intervals;
-
+        if(!added)
+        it.push_back(nit);
+        return it;
     }
 };

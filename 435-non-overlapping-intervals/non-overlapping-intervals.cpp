@@ -1,18 +1,22 @@
 class Solution {
 public:
-    int eraseOverlapIntervals(vector<vector<int>>& it) {
-        sort(it.begin(), it.end(), [](const vector<int> a, const vector<int> b){
-            return a[1]==b[1] ? a[0]<b[0]: a[1] < b[1]  ;
+    int eraseOverlapIntervals(vector<vector<int>>& nums) {
+        sort(nums.begin(), nums.end(), [](auto a, auto b){
+            return a[1] < b[1];
         });
 
-        int cur =0,res=0;
-        for(int i =1;i<it.size();i++){
-            if(max(it[i][0], it[cur][0]) < min(it[i][1], it[cur][1])){
-                res++;
+        int res =0, n = nums.size();
+        int index = 0;
+        for(int i =1;i<n;i++){
+
+            if(max(nums[i][0], nums[index][0]) < min(nums[i][1], nums[index][1])){ // overlap
+                res++; // inc the cnt to be removed 
+
             }
-            else 
-            cur = i;
+            else index=i; 
         }
+
         return res;
+        
     }
 };

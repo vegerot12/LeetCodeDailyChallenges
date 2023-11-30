@@ -19,6 +19,9 @@ void dfs(vector<int>& nums, int ind,vector<vector<int>>& res,
             target += nums[i];
 
              }
+             else{
+                 break;
+             }
         }
 
 

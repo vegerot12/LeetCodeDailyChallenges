@@ -20,7 +20,6 @@ public:
              f2 = s2;
             s2 = r2;
             }
-cout<<i<<f1<<f2<<s1<<s2<<r1<<r2<<endl;
            
         }
         return max(r1,r2);

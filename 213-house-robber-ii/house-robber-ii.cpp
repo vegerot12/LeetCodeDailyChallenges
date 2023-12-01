@@ -11,13 +11,13 @@ public:
         for(int i=2;i<nums.size();i++){
             if(i!= nums.size()-1 ){
             r1 = max(f1 +   nums[i] , s1);
-                 f1 = s1;
+            f1 = s1;
             s1 = r1;
             }
             if(i!=2 ){
             r2 = max(f2 + nums[i] , s2);
 
-             f2 = s2;
+            f2 = s2;
             s2 = r2;
             }
            

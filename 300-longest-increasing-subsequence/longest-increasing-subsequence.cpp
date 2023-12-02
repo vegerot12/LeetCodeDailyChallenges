@@ -2,26 +2,22 @@ class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         vector<int> lis;
+        int n = nums.size();
 
         lis.push_back(nums[0]);
 
-        for(int i =1;i<nums.size();i++){
+        for(int i =1 ;i<n;i++){
+
             if(lis.back() < nums[i]){
                 lis.push_back(nums[i]);
-                cout<<"pushing"<<nums[i]<<endl;
             }
             else{
-                auto posOfFirstSmaller = lower_bound(lis.begin(), lis.end(),nums[i]) - lis.begin();
-                
-                    lis[posOfFirstSmaller] = nums[i];
-                cout<<"replacing"<<nums[i]<<endl;
-
-
-                
+                int posOfNextGrter = lower_bound(lis.begin(), lis.end(), nums[i])-lis.begin();
+                lis[posOfNextGrter] = nums[i];
             }
+
+
         }
         return lis.size();
     }
-    
 };
-

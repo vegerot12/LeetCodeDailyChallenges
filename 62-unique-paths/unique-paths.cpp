@@ -27,16 +27,30 @@
 */
 class Solution {
 public:
-    int uniquePaths(int m, int n) {
-         vector<int> dp(n,1); // first row is 1 because only one way to reach all cols in first row and all rows in first col 
-         for(int i =1;i<m;i++){
-             for(int j = 1;j<n;j++){
-                 dp[j] = dp[j] + dp[j-1];
-              }
-         }
-        // here dp[j] refers to prev row and dp[j-1] refers to prev col
+    // int uniquePaths(int m, int n) {
+    //      vector<int> dp(n,1); // first row is 1 because only one way to reach all cols in first row and all rows in first col 
+    //      for(int i =1;i<m;i++){
+    //          for(int j = 1;j<n;j++){
+    //              dp[j] = dp[j] + dp[j-1];
+    //           }
+    //      }
+    //     // here dp[j] refers to prev row and dp[j-1] refers to prev col
             
          
-    return dp[n-1];
+    // return dp[n-1];
+    int uniquePaths(int m, int n) {
+
+         vector<int> dp(n,1);
+
+         for(int i =1;i<m;i++){
+             for(int j =1;j<n;j++){
+                 dp[j] = dp[j] + dp[j-1];
+             }
+         }
+
+
+return dp[n-1];
+         
+    
     }
 };

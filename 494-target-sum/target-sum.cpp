@@ -26,7 +26,7 @@ int findSum(vector<int>& nums, int target,int sum,  vector<vector<int>> &dp, int
         return findSum(nums, target,sum, dp, 0,0);
     }
 
-      int findTargetSumWays(vector<int>& nums, int target) {
+      int findTargetSumWays2D(vector<int>& nums, int target) {
 int tot = 0;
         for(int i =0;i<nums.size();i++){
             tot+= nums[i];
@@ -51,5 +51,33 @@ int tot = 0;
         }
 
 return dp[nums.size()-1][target+tot] ;
+      }
+
+      int findTargetSumWays(vector<int>& nums, int target) {
+int tot = 0;
+        for(int i =0;i<nums.size();i++){
+            tot+= nums[i];
+        }
+
+        if(abs(target) > tot) return 0;
+
+        vector<int> dp( 2*tot+1, 0);
+
+        dp[tot + nums[0]] += 1;
+        dp[tot - nums[0]]  += 1;
+        for(int i = 1; i<nums.size();i++){
+vector<int> next( 2*tot+1, 0);
+            for(int j = -tot;j<=tot ; j++){
+                if(dp[j+tot] > 0){
+                    next[tot + j+ nums[i]] += dp[tot+j];
+                    next[tot + j- nums[i]] += dp[tot+j];
+
+                }
+            }
+           dp=next;
+            
+        }
+
+return dp[target+tot] ;
       }
 };

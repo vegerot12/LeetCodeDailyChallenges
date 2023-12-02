@@ -27,19 +27,21 @@ public:
         vector<bool> dp(n+1);
         dp[0] = true;
 
-        for(int i=0;i<n;i++){
+        for(int i =0;i<n;i++){
             if(!dp[i]) continue;
-            Trie* p = root;
-            for(int j = i;j<n;j++){
+
+                Trie* p = root;
+            for(int j=i;j<n;j++){
                 if(!p->child[s[j]-'a']) break;
+
                 p = p->child[s[j]-'a'];
-                if(p->isEnd) {
+                if(p->isEnd){
                     dp[j+1] = true;
                 }
-
-                
             }
         }
+
+        
         return dp[n];
     }
 };

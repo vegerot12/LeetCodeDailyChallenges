@@ -7,11 +7,14 @@ int dfs(string& s, string& t, int i, int j, int n,int m,  map<pair<int,int>, int
     if(cache.find({i,j})!= cache.end()){
         return cache[{i,j}];
     }
-
-    if(s[i] == t[j]) // if cur char is matched  // 1. we move both i and j and try and 2. we move i alone keep j same see if next also match and add both possible cases
-    cache[{i,j}] = dfs(s,t,i+1,j+1, n,m,cache) + dfs(s,t,i+1,j,n,m,cache);
-    else 
-    cache[{i,j}] = dfs(s,t,i+1,j,n,m, cache); // cur str didnt match so inc cur str ptr
+    // if(s[i]==t[j])
+    // cache[{i,j}] = dfs(s,t,i+1,j+1,n,m,cache) + dfs(s,t,i+1,j,n,m,cache);
+    // else
+    // cache[{i,j}] = dfs(s,t,i+1,j,n,m,cache);
+      if(s[i]==t[j])
+    cache[{i,j}] = dfs(s,t,i+1,j+1,n,m,cache) ;
+    
+    cache[{i,j}] += dfs(s,t,i+1,j,n,m,cache);
 
     return cache[{i,j}];
 

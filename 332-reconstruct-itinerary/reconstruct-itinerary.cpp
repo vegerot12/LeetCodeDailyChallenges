@@ -12,7 +12,7 @@ class Solution {
           }
 public:
     vector<string> findItinerary(vector<vector<string>>& tickets) {
-          sort(tickets.begin(), tickets.end());
+         // sort(tickets.begin(), tickets.end());
           for(auto& t:tickets){
               adj[t[0]].push(t[1]); // tickets are diretced edges
           }

@@ -1,4 +1,6 @@
+// O(M*n) and O(1)
 class Solution {
+
 public:
     int numberOfBeams(vector<string>& bank) {
         int pre=0, cur=0, res=0;

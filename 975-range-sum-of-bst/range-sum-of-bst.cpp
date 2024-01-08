@@ -16,8 +16,9 @@ public:
 
         if(root->val>= low && root->val <= high) sum+= root->val;
 
-        
+        if(root->val >= low)
         add(root->left, low, high, sum);
+        if(root->val <= high)
         add(root->right, low, high, sum);
 
     }

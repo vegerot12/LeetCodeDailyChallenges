@@ -11,20 +11,30 @@
  */
 class Solution {
 public:
-    void add(TreeNode* root, int low, int high, int& sum){
-        if(!root) return;
+    int add(TreeNode* root, int low, int high){
+        if(!root) return 0;
 
-        if(root->val>= low && root->val <= high) sum+= root->val;
+        if(root->val > high)
+        return add(root->left, low, high);
+        else if(root->val < low)
+       return add(root->right, low, high);
+        else
+        return root->val +add(root->right, low, high) + add(root->left, low, high) ;
 
-        if(root->val >= low)
-        add(root->left, low, high, sum);
-        if(root->val <= high)
-        add(root->right, low, high, sum);
+        
+
+
+        // if(root->val>= low && root->val <= high) sum+= root->val;
+
+        // if(root->val >= low)
+        // add(root->left, low, high, sum);
+        // if(root->val <= high)
+        // add(root->right, low, high, sum);
 
     }
     int rangeSumBST(TreeNode* root, int low, int high) {
-        int sum = 0;
-        add(root, low, high, sum);
-        return sum;
+       
+        return add(root, low, high);
+      
     }
 };

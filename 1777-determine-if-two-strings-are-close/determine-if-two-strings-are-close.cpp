@@ -1,3 +1,20 @@
+/*
+
+"cabbba"
+word2 =
+"abbccc"
+Output
+false
+Expected
+true
+
+1. we find freq of each, sort the freq and if the there are ele with same num of freq in both and all the ele pres in one must be there in another too
+
+2. so w1,w2 check if same freq are there so that all 3 bbb can be ccc and onre c can be one a and 2 a can become 2 b
+
+
+*/
+
 class Solution {
 public:
     bool closeStrings(string word1, string word2) {

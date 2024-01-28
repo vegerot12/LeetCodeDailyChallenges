@@ -27,6 +27,8 @@ public:
                 counter = {{0,1}};
                 int cur = 0;
                 for (int k = 0; k < m; k++) {
+                    // accumulate col wise sum across rows in cur 
+                    // by subtracting j col - i-1 col 
                     cur += A[k][j] - (i > 0 ? A[k][i - 1] : 0);
                     res += counter.find(cur - target) != counter.end() ? counter[cur - target] : 0;
                     counter[cur]++;

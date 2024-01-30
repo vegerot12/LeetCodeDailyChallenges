@@ -1,81 +1,51 @@
 class Solution {
 public:
-    bool isOp(string c){
-        return c=="+"|| c=="-" || c=="/" || c=="*";
+    bool isOperator(string s ){
+
+        if(s.size() > 1 ) return false;
+        return s[0] == '*' || s[0] =='/' || s[0] =='+' ||s[0] == '-';
+
     }
 
-    int eval(int a, int b, char c){
-        switch(c){
+    long eval( long long int a, long long int b, char op){
+        switch(op){
             case '+':
-            cout<<a+b;
-            return a+b;
+            return a + b;
 
             case '-':
-            cout<<a-b;
-            return a-b;
+            return a - b;
 
             case '*':
-            cout<<a*b;
             return a*b;
 
-            case '/':
-            cout<<a/b;
+            default :
             return a/b;
-
         }
-        return 0;
-    }
-    int evalRPNSTACK(vector<string>& t) {
-        stack<long> s;
-
-        int i =0, n = t.size();
-        for(int i=0;i<n;i++){
-            if(isOp(t[i])){
-              long b =  s.top();
-              s.pop();
-              long a = s.top();
-              s.pop();
-              long res = eval(a,b,t[i][0]);
-              cout<<res;
-              s.push(res);
-
-
-            }
-            else{
-                int num= stoi(t[i]);
-                s.push(num);
-            }
-
-        }
-        return s.top();
-    }
-    int evalRPN(vector<string>& t) {
         
+    }
+    int evalRPN(vector<string>& tokens) {
+        int t =0, i=0; 
+        long res = 0;
 
-        int i =0, n = t.size(), top =0;
-        long long res;
-        for(int i=0;i<n;i++){
-            if(isOp(t[i])){
-                  long long int b = stoll(t[--top]); // take last two as int
-                
-                long long int a = stoll(t[--top]);
-               
-            
-             
-               res = eval(a,b,t[i][0]);
-              cout<<res;
-              
-              t[top++] = to_string(res);
-           
-
-
+        while(i<tokens.size()){
+            if(!isOperator(tokens[i])){ // number
+                tokens[t++] = tokens[i];
             }
             else{
-                t[top++]= (t[i]);
-                
-            }
+                // evaluate
+                long long int b = stoll(tokens[--t]);
+                long long int a = stoll(tokens[--t]);
 
+                res = eval(a,b, tokens[i][0]);
+
+                tokens[t++] = to_string(res);
+
+
+            }
+            i++;
         }
-        return stoi(t[0]);
+
+        return stoi(tokens[0]);
+
     }
 };

@@ -1,5 +1,6 @@
 class Solution {
 public:
+// O(n log n) and O(n)
     vector<vector<int>> divideArray(vector<int>& nums, int k) {
         sort(nums.begin(), nums.end());
         vector<vector<int>> res;

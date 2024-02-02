@@ -1,29 +1,24 @@
 class Solution {
 public:
-    vector<int> sequentialDigits(int low, int high) {
         vector<int> res;
-        int l1 = to_string(low).size();
-        int l2 = to_string(high).size();
-        
-
-        for(int i =l1; i<=l2 ;i++){ // digit len 
-
+        void dfs(int low, int high, int i , int num){
+            if(num >= low and num <= high)
+            {
+                res.push_back(num);
                
-                for(int k = 1; k<=10-i;k++){ // starting digit 
-                int start = k;
-                 int n =0;
-            for(int j = 0;j<i;j++){ // no of digits
-
-                    n = n*10 + start;
-                    start ++;
-
-
-                }
-                if(n >= low and n <= high){
-                    res.push_back(n);
-                }
             }
+
+            if( i > 9 || num > high) return ;
+
+            dfs(low, high, i+1, num*10+i);
         }
+    vector<int> sequentialDigits(int low, int high) {
+
+        for(int i=1;i<9;i++){
+            dfs( low, high, i, 0);
+        }
+       sort(res.begin(), res.end());
+        
 
 return res;
     }

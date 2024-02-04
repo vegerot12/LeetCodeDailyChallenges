@@ -1,40 +1,51 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        unordered_map<char, int> m;
+        unordered_map<char,int> m;
 
-        for(auto c:t){
+        for(auto& c:t){
             m[c]++;
         }
-        int n1= s.size(), n2 = t.size();
-        int st=0, e=0, bs=0, len = n1+1 , tot = n2;
 
-        while(e<n1){
-            
-            if(m.find(s[e])!= m.end()){
-                if(m[s[e]]>0) tot--;
-                m[s[e]]--;
-                
+        int start=0, bestStart = 0, total = m.size(), res=INT_MAX;
+
+        for(int i =0 ;i<s.size() ; i++){
+         if(m.find(s[i]) != m.end()){
+
+            m[s[i]]--;
+            // if becomes 0 dec toatl
+            if(m[s[i]]==0){
+                total --; 
             }
+         }   
+                while(total == 0){
 
-            while(tot == 0 ){
-          
-                if(m.find(s[st])!= m.end()){
-                    if(len> e-st+1){
-                         len = e-st+1;
-                         bs = st;
-                    }
+                    if(m.find(s[start]) != m.end()){
+   if(i-start+1 < res){
+                   bestStart = start;
+                   res =i - start +1;
+
+               }
+                                 //  we move start ptr to minimise 
+
+              
+                if(m[s[start]] == 0) total ++;
+                  m[s[start]]++;
                 
-                if(m[s[st]] == 0) tot++;
-                m[s[st]]++;
                
-            }
-             st++;
-            }
 
-            e++;
+                }
+                start ++;
+                    }
+            
+
+
+
+
+
+            
         }
-        if(len > n1) return "";
-        return s.substr(bs, len);
+        if(res > s.size()) return "";
+        return s.substr(bestStart, res);
     }
 };

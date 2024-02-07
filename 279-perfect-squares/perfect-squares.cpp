@@ -1,5 +1,6 @@
 class Solution {
 public:
+// O(n * sqrt(n))
     int numSquares(int n) {
 
 
@@ -18,7 +19,7 @@ public:
 
         // amt
         for(int i = 1;i<=n;i++){
-            // coins
+            // coins starts from 1 as first 0 is not a real coin
             for(int j = 1;j<sqrCnt;j++){
                 if(i>=sqr[j]){
                     dp[i] = min(dp[i], dp[i-sqr[j]]+1);

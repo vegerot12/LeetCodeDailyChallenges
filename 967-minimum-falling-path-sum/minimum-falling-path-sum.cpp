@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int minFallingPathSum(vector<vector<int>>& matrix) {
+    int minFallingPathSumSum1Darr(vector<vector<int>>& matrix) {
          int n = matrix.size(), m = matrix[0].size();
 
     //  Iterate over matrix
@@ -28,7 +28,7 @@ public:
     return maxPathSum;
     }
 
-    int minFallingPathSum1Darr(vector<vector<int>>& matrix) {
+    int minFallingPathSum(vector<vector<int>>& matrix) {
          int n = matrix.size(), m = matrix[0].size();
 
          vector<int> prev(m,INT_MAX);

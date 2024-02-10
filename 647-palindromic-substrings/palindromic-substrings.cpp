@@ -1,35 +1,28 @@
 class Solution {
 public:
-   public:
+    int countPal(int st, int e, string s){
+       int noOfPal =0;
+      
+        while(st >=0 && e< s.size() && s[st]==s[e]){
+            st--;
+            e++;
+           noOfPal++;
+        }
+
+        return noOfPal;
+
+    }
+
     int countSubstrings(string s) {
-        int ans = 0;
+        int n = s.size();
+        int res = 0;
+        for(int i=0;i<n;i++){
+           res+= countPal(i,i,s);
+            res += countPal(i,i+1,s);
 
-        for (int i = 0; i < s.size(); ++i) {
-            // odd-length palindromes, single character center
-            ans += countPalindromesAroundCenter(s, i, i);
+          
 
-            // even-length palindromes, consecutive characters center
-            ans += countPalindromesAroundCenter(s, i, i + 1);
         }
-
-        return ans;
+        return res;
     }
-
-    int countPalindromesAroundCenter(const string& ss, int lo, int hi) {
-        int ans = 0;
-
-        while (lo >= 0 and hi < ss.size()) {
-            if (ss[lo] != ss[hi])
-                break;      // the first and last characters don't match!
-
-            // expand around the center
-            lo--;
-            hi++;
-
-            ans++;
-        }
-
-        return ans;
-    }
-
 };

@@ -12,9 +12,10 @@ public:
 
         vector<bool> dp(sum+1, false);
 
-            dp[0]= true; // initialise target 0 is true 
+        dp[0]= true; // initialise target 0 is true 
         for(int i = 0;i<n;i++){
             for(int j =sum ; j>= nums[i];j--){
+                // sum starting from sum upto nums [i] as j , nums[i] can corntirbute to j less than that 
                
                 dp[j] = dp[j-nums[i]] || dp[j];
                 

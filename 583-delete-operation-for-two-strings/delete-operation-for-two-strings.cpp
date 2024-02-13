@@ -20,6 +20,8 @@ public:
     }
     int minDistance(string word1, string word2) {
         int tot = word1.size() + word2.size();
+        // word1 = "sea", word2 = "eat" lcs = 2, tot = 6- 2*2 = 2 
+        // park spake => lcs = pae 3 tot = 9 so 9-2*3 =3 rsk
         return tot - 2*(longestCommonSubsequence(word1, word2));
      }
 };

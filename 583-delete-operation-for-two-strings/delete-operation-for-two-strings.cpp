@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int longestCommonSubstring(string &s, string &t){
+    int longestCommonSubsequence(string &s, string &t){
         int n = s.size(), m = t.size();
 
         vector<int> dp(m+1,0) , cur(m+1,0);
@@ -20,6 +20,6 @@ public:
     }
     int minDistance(string word1, string word2) {
         int tot = word1.size() + word2.size();
-        return tot - 2*(longestCommonSubstring(word1, word2));
+        return tot - 2*(longestCommonSubsequence(word1, word2));
      }
 };
